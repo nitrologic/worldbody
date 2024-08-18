@@ -84,17 +84,55 @@ int hostStandardIn(){
 
 // b2DestroyBody
 
+
+struct world
+{
+	const int BODY_BASE = 0x21000000;
+	static int body_count;
+
+	b2WorldId _world;
+	std::map<int,b2BodyId> _bodies;
+
+	world(){
+		b2WorldDef worldDef = b2DefaultWorldDef();
+		worldDef.gravity = ( b2Vec2 ){ 0.0f, -10.0f };
+		_world = b2CreateWorld( &worldDef );
+		std::cout << "_worldId:" << _world.index1 << "." << _world.revision << std::endl;
+	}
+
+	int addBody(){
+		b2BodyDef groundBodyDef = b2DefaultBodyDef();
+		groundBodyDef.position = ( b2Vec2 ){ 0.0f, -10.0f };
+		b2BodyId body = b2CreateBody( _world, &groundBodyDef );
+		int handle=BODY_BASE+(body_count++);
+		_bodies[handle]=body;
+		return handle;
+	}
+
+	int addBox(){
+		b2Polygon groundBox = b2MakeBox( 50.0f, 10.0f );
+		b2ShapeDef groundShapeDef = b2DefaultShapeDef();
+		b2CreatePolygonShape( groundId, &groundShapeDef, &groundBox );		
+	}
+
+};
+
+int world::body_count = 0;
+
 int main(){
 	int result = 0;
 
     std::cout << "worldbody 0.0.2" << std::endl;
 	std::cout << "©2024 Simon Armstrong" << std::endl;
 
+	world w0;
+	w0.addBody();
+
 	hostStandardIn();
 
 	while(true){
 		std::cout << "." << std::flush;
-		sleep(100);
+		sleep(1000);
 	}
 //    int testresult=WorldTest();
 
@@ -104,6 +142,7 @@ int main(){
 #ifdef tests
 
 #include "test_macros.h"
+
 
 int WorldTest( void );
 

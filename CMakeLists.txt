@@ -21,3 +21,4 @@ include_directories(
 )
 
 add_executable(worldbody worldbody.cpp)
+target_link_libraries(worldbody box2d)
