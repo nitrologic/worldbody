@@ -112,7 +112,8 @@ struct world
 	int addBox(){
 		b2Polygon groundBox = b2MakeBox( 50.0f, 10.0f );
 		b2ShapeDef groundShapeDef = b2DefaultShapeDef();
-		b2CreatePolygonShape( groundId, &groundShapeDef, &groundBox );		
+//		b2CreatePolygonShape( groundId, &groundShapeDef, &groundBox );		
+		return 0;
 	}
 
 };
