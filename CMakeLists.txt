@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
 
 #simon was here
-
+if(APPLE)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w -std=c++17")
+add_definitions( -D__MACOSX_CORE__ )
+endif()
 if(WIN32)
 #box2d rule
 add_definitions( -D_M_X64 )

@@ -19,7 +19,7 @@
 const int64_t NotAnInt=0x8000000000000000;
 const double NotANumber=std::numeric_limits<double>::quiet_NaN();
 
-std::wstring_convert<std::codecvt_utf8<wchar_t>> convert32;
+std::wstring_convert<std::codecvt_utf8<wchar_t> > convert32;
 
 enum JSType{
 	Object,

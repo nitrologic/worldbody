@@ -43,30 +43,6 @@ typedef std::wstring utf32;
 
 enum SystemPlatform{Windows,Linux,Apollo,Neptune,Broadcom,WSL2};
 
-// used by
-// int replyGraph(redisReply *r,NitroNode &graph){
-
-struct NitroNode
-{
-	utf8 name;
-	std::vector<NitroNode> kids;
-
-	utf8 toString() const{
-		std::stringstream ss;
-		ss << quoted(name);
-		size_t kidCount=kids.size();
-		if(kidCount>0){
-			ss<<"[";
-			for(int i=0;i<kidCount;i++){
-				if(i>0) ss<<",";
-				ss<<kids[i].toString();
-			}
-			ss<<"]";
-		}
-		return ss.str();
-	}
-};
-
 typedef std::string escaped;
 typedef std::vector<utf8> Strings;
 typedef std::vector<uint8_t> Packet;
@@ -149,6 +125,30 @@ Strings splitString(utf8 line,char delim){
 	}
 	return split;
 }
+
+// used by
+// int replyGraph(redisReply *r,NitroNode &graph){
+
+struct NitroNode
+{
+	utf8 name;
+	std::vector<NitroNode> kids;
+
+	utf8 toString() const{
+		std::stringstream ss;
+		ss << quoted(name);
+		size_t kidCount=kids.size();
+		if(kidCount>0){
+			ss<<"[";
+			for(int i=0;i<kidCount;i++){
+				if(i>0) ss<<",";
+				ss<<kids[i].toString();
+			}
+			ss<<"]";
+		}
+		return ss.str();
+	}
+};
 
 
 #ifdef _WIN32
