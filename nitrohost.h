@@ -41,7 +41,7 @@ std::string CachePath="../../cache";
 typedef std::string utf8;
 typedef std::wstring utf32;
 
-enum SystemPlatform{Windows,Linux,Apollo,Neptune,Broadcom,WSL2};
+enum SystemPlatform{Windows,MacOS,Linux,RaspberryPi,WSL2};
 
 typedef std::string escaped;
 typedef std::vector<utf8> Strings;
