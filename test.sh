@@ -1,7 +1,7 @@
 mkdir -p bin
 pushd bin
 cmake ..
-make
+make -j8
 popd
 
 bin/worldbody
