@@ -123,8 +123,12 @@ int world::body_count = 0;
 int main(){
 	int result = 0;
 
-    std::cout << "worldbody 0.0.2" << std::endl;
-	std::cout << "©2024 Simon Armstrong" << std::endl;
+    std::cout << "worldbody 0.0.3";
+	std::cout << " (c) 2024 Simon Armstrong" << std::endl;
+
+	b2Version v=b2GetVersion();
+    std::cout << "box2c " << v.major << "." << v.minor << "." << v.revision;
+	std::cout << " (c) 2022 Erin Catto" << std::endl;
 
 	world w0;
 	w0.addBody();

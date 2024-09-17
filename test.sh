@@ -1,3 +1,5 @@
+set -e
+
 mkdir -p bin
 pushd bin
 cmake ..
