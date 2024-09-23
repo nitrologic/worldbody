@@ -11,6 +11,7 @@
 #include <iostream>
 #include <stdio.h>
 //#include <unistd.h>
+#include <thread>
 
 #ifdef __WIN32
 #include <synchapi.h>
@@ -39,7 +40,7 @@ utf8 InvokeRPC(utf8 id, utf8 method,JSValue *params){
 }
 
 
-void *cliTask(void *args){
+void cliTask(){
 	while(true){
 		std::cout << ">" << std::flush;
 		for (std::string line; std::getline(std::cin, line);) {
@@ -55,7 +56,7 @@ void *cliTask(void *args){
 //					raise(SIGINT);
 //					kill(-1,SIGINT);  // a bit overkill
 // 					kill(0,SIGINT);  // works weel from fork
-					return NULL;
+					return;
 				}
 				split.erase(split.begin());
 				JSValue *args=new JSValue(joinStrings(split," "),true);
@@ -69,7 +70,7 @@ void *cliTask(void *args){
 	}
 }
 
-
+#ifdef USE_PTHREADS
 int hostStandardIn(){
 	pthread_t thread=0;
 	const pthread_attr_t *threadAttributes=NULL;
@@ -81,6 +82,15 @@ int hostStandardIn(){
 	}
 	return 0;
 }
+#else
+int hostStandardIn(){
+
+	std::thread* thread = 0;
+	thread = new std::thread(cliTask);
+	return 0;
+}
+
+#endif
 
 // b2DestroyBody
 
